@@ -1,20 +1,18 @@
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 
 
 class Menu(models.Model):
-    name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, primary_key=True)
 
     def __str__(self):
-        return self.name
+        return self.slug
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('slug',)
 
 
 class Folder(models.Model):
-    name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
     parent = models.ForeignKey(
         'self',
@@ -32,15 +30,13 @@ class Folder(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['menu', 'slug'], name='unique_folder_slug_in_menu'),
-            models.UniqueConstraint(
-                fields=['name', 'parent'], name='unique_folder_name_in_parents_folder'),
         ]
 
-        ordering = ('name', )
+        ordering = ('slug', )
 
     def clean(self):
         if self.parent and self.parent.menu != self.menu:
             raise ValidationError('Parent menu must eq menu')
 
     def __str__(self):
-        return self.name
+        return self.slug

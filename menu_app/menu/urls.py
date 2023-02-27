@@ -1,10 +1,10 @@
 from django.urls import path
 
-from . import views
+from .views import ListMenusPageView, FoldersPageView
 
 app_name = 'menu'
 
 urlpatterns = [
-    path('', views.IndexPageView.as_view(), name='list_menus'),
-    path('<slug:menu_slug>/', views.FoldersPageView.as_view(), name='menu')
+    path('', ListMenusPageView.as_view(), name='list_menus'),
+    path('<slug:menu_slug>/', FoldersPageView.as_view(), name='menu'),
 ]

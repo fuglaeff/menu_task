@@ -3,7 +3,7 @@
 <ul>
   {% if folder_nodes|get:p|length > 0 %}
     {% for folder in folder_nodes|get:p %}
-      <li> <a href='{{ path_to_folder|add:folder.slug }}/'><i class='fas fa-folder'></i> {{ folder.name }}</a>
+      <li> <a href='{{ path_to_folder|add:folder.slug }}/'><i class='fas fa-folder'></i> {{ folder }}</a>
         {% if folder.slug in path %}
           <ul>
             {% with p=folder.slug path_to_folder=path_to_folder|add:folder.slug|add:'/' %}

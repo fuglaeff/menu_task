@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
+{% block title %} {{ menu_slug }} {% endblock %}
 {% block content %}
-<a href='{% url "menu:list_menus" %}'>Back</a> <a href='{% url "menu:menu" menu_slug %}' style='margin-left: 3rem;'>Close all</a>
-<br>
-{{ menu_slug }}
-<br>
-<br>
-{% with p='root' path_to_folder='/'|add:menu_slug|add:'/?path=' %}
-  {% include 'menu_tree.html' %}
-{% endwith %}
+  <a href='{% url "menu:list_menus" %}'>Back</a>
+  <a href='{% url "menu:menu" menu_slug %}' style='margin-left: 3rem;'>Close all</a>
+  <br>
+  {{ menu_slug }}
+  <br>
+  <br>
+  {% with p='root' path_to_folder='/'|add:menu_slug|add:'/?path=' %}
+    {% include 'menu_tree.html' %}
+  {% endwith %}
 {% endblock %}

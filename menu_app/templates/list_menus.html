@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+List of menus
+<ul>
+{% for menu in menus %}
+  <li><a href='{% url "menu:menu" menu.slug %}'>menu</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

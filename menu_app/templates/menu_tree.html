@@ -1,0 +1,19 @@
+{% load menu_extras %}
+
+<ul>
+  {% if folder_nodes|get:p|length > 0 %}
+    {% for folder in folder_nodes|get:p %}
+      <li> <a href='{{ path_to_folder|add:folder.slug }}/'><i class='fas fa-folder'></i> {{ folder.name }}</a>
+        {% if folder.slug in path %}
+          <ul>
+            {% with p=folder.slug path_to_folder=path_to_folder|add:folder.slug|add:'/' %}
+              {% include 'menu_tree.html' %}
+            {% endwith %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  {% else %}
+  <li><i><span style='color: gray;'>{{ 'null' }}</span></i></li>
+  {% endif %}
+</ul>
